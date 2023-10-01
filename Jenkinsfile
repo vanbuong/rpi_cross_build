@@ -33,7 +33,7 @@ pipeline {
           docker rmi panlpowerbuild
           docker build -t panlpowerbuild .
           docker run -d -v /var/jenkins/workspace/PanLPower:/build/panlpowerbuild --name panlpowerbuild panlpowerbuild
-          docker exec panlpowerbuild bash -c 'cd panlpowerbuild/wiringPi; ./build; cd ../Debug && make clean && make'
+          docker exec panlpowerbuild bash -c 'cd panlpowerbuild/WiringPi; sudo ./build; cd ../Debug && make clean && make'
           docker stop panlpowerbuild
           docker rm panlpowerbuild
           docker rmi panlpowerbuild
