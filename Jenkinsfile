@@ -28,11 +28,12 @@ pipeline {
       steps {
         sh '''
           docker pull sdthirlwall/raspberry-pi-cross-compiler
+          docker stop panlpowerbuild
+          docker rm panlpowerbuild
+          docker rmi panlpowerbuild
           docker build -t panlpowerbuild .
           docker run -d -v /var/jenkins/workspace/PanLPower:/build/panlpowerbuild --name panlpowerbuild panlpowerbuild
-          docker exec -it panlpowerbuild /bin/bash
-          cd panlpowerbuild/Debug && make clean && make
-          exit
+          docker exec panlpowerbuild bash -c 'cd panlpowerbuild/Debug && make clean && make'
           docker stop panlpowerbuild
           docker rm panlpowerbuild
           docker rmi panlpowerbuild
