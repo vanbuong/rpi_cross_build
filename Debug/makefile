@@ -6,15 +6,16 @@ ODIR = .
 LDIR = ../st7796s
 
 #LIBS = -lncurses -lbcm2835
+LIBS = -lwiringPi
 
 _DEPS = st7796s_define.h rpi_dma_utils.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o rpi_dma_test.o rpi_dma_utils.o st7796s.o
+_OBJ = main.o rpi_dma_utils.o st7796s.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR)/%.o: ../st7796s/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)

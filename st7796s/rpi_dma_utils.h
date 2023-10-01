@@ -15,6 +15,8 @@
 // limitations under the License.
 //
 
+#include <stdint.h>
+
 // Location of peripheral registers in physical memory
 #define PHYS_REG_BASE   PI_4_REG_BASE
 #define PI_01_REG_BASE  0x20000000  // Pi Zero or 1

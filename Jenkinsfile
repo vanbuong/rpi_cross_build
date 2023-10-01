@@ -33,7 +33,7 @@ pipeline {
           docker rmi panlpowerbuild
           docker build -t panlpowerbuild .
           docker run -d -v /var/jenkins/workspace/PanLPower:/build/panlpowerbuild --name panlpowerbuild panlpowerbuild
-          docker exec panlpowerbuild bash -c 'cd panlpowerbuild/Debug && make clean && make'
+          docker exec panlpowerbuild bash -c 'apt-get update; apt-get install wiringPi; cd panlpowerbuild/Debug && make clean && make'
           docker stop panlpowerbuild
           docker rm panlpowerbuild
           docker rmi panlpowerbuild
@@ -62,7 +62,7 @@ pipeline {
 
   post {
     always {
-      notifyViaEmail(params['Notified Emails'])
+      //notifyViaEmail(params['Notified Emails'])
       cleanWs()
     }
   }

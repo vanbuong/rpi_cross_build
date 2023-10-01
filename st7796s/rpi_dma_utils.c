@@ -139,7 +139,7 @@ int open_mbox(void)
    int fd;
 
    if ((fd = open("/dev/vcio", 0)) < 0)
-       fail("Error: can't open VC mailbox\n");
+       printf("Error: can't open VC mailbox\n");
    return(fd);
 }
 // Close mailbox interface
@@ -230,14 +230,14 @@ void *map_segment(void *addr, int size)
 
     size = PAGE_ROUNDUP(size);
     if ((fd = open ("/dev/mem", O_RDWR|O_SYNC|O_CLOEXEC)) < 0)
-        fail("Error: can't open /dev/mem, run using sudo\n");
+        printf("Error: can't open /dev/mem, run using sudo\n");
     mem = mmap(0, size, PROT_WRITE|PROT_READ, MAP_SHARED, fd, (uint32_t)addr);
     close(fd);
 #if DEBUG
     printf("Map %p -> %p\n", (void *)addr, mem);
 #endif
     if (mem == MAP_FAILED)
-        fail("Error: can't map memory\n");
+        printf("Error: can't map memory\n");
     return(mem);
 }
 // Free mapped memory
