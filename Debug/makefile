@@ -5,7 +5,7 @@ CFLAGS = -I$(IDIR)
 ODIR = .
 LDIR = ../st7796s
 
-LIBS = -lncurses -lbcm2835
+#LIBS = -lncurses -lbcm2835
 
 _DEPS = st7796s_define.h rpi_dma_utils.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))

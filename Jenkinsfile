@@ -29,13 +29,21 @@ pipeline {
         sh '''
           docker pull sdthirlwall/raspberry-pi-cross-compiler
           docker build -t panlpowerbuild .
+          docker run -d -v /var/jenkins/workspace/PanLPower:/build/panlpowerbuild --name panlpowerbuild panlpowerbuild
+          docker exec -it panlpowerbuild /bin/bash
+          cd panlpowerbuild/Debug && make clean && make
+          exit
+          docker stop panlpowerbuild
+          docker rm panlpowerbuild
+          docker rmi panlpowerbuild
+          docker images
         '''
       }
     }
     stage ('Generate Package') {
       steps {
         dir ("Debug") {
-          sh "tar.exe -a -c -f ../../PanLPower.zip PanLPower"
+          sh "tar.exe -a -c -f ../../PanLPower.zip PanLPower/Debug/main"
         }
       }
 
