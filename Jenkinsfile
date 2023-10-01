@@ -13,7 +13,7 @@ pipeline {
 
   parameters {
     booleanParam(defaultValue: true, description: 'To enable source code analysis', name: "Enable SonarQube scan" )
-    string defaultValue: 'buong.vo@brtchip.com', description: 'Comma seperated emails', name: 'Notified Emails', trim: true
+    string defaultValue: 'vanbuong13ktmt@gmail.com', description: 'Comma seperated emails', name: 'Notified Emails', trim: true
   }
 
   stages {
@@ -33,7 +33,7 @@ pipeline {
           docker rmi panlpowerbuild
           docker build -t panlpowerbuild .
           docker run -d -v /var/jenkins/workspace/PanLPower:/build/panlpowerbuild --name panlpowerbuild panlpowerbuild
-          docker exec panlpowerbuild bash -c 'apt-get update; apt-get install wiringPi; cd panlpowerbuild/Debug && make clean && make'
+          docker exec panlpowerbuild bash -c 'cd panlpowerbuild/wiringPi; ./build; cd ../Debug && make clean && make'
           docker stop panlpowerbuild
           docker rm panlpowerbuild
           docker rmi panlpowerbuild
