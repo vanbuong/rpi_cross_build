@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'J0A4C0026_NA_Linux'
+      label 'DevEnv'
       customWorkspace '/var/jenkins/workspace/PanLPower'
     }
   }
